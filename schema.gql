@@ -12,6 +12,7 @@ type Ticket {
 
 type Query {
     allTickets: [Ticket]
+    findUserByName(name: String!): User
 }
 
 

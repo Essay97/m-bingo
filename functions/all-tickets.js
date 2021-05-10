@@ -1,4 +1,3 @@
-/* import query from "./query"; */
 const query = require("./util/query");
 
 const GET_TICKETS = `
