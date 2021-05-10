@@ -11,11 +11,8 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
-    "prod": "gastby build; npm run build:lambda",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "start:lambda": "netlify-lambda serve functions",
-    "build:lambda": "netlify-lambda build functions"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@fontsource/krona-one": "^4.3.0",
@@ -25,7 +22,6 @@
     "gatsby": "^3.4.1",
     "gatsby-plugin-react-helmet": "^4.4.0",
     "gatsby-plugin-styled-components": "^4.4.0",
-    "netlify-lambda": "^2.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
