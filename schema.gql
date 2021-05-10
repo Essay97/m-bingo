@@ -1,0 +1,18 @@
+type User {
+    name: String! @unique
+    ticket: Ticket @relation
+}
+
+type Ticket {
+    owner: User!
+    row1: [String!]!
+    row2: [String!]!
+    row3: [String!]!
+}
+
+type Query {
+    allTickets: [Ticket]
+}
+
+
+
