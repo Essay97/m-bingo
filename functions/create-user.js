@@ -15,7 +15,10 @@ mutation($name: String!,
         }
       }
     }) {
-      _id
+      _id 
+      ticket {
+        _id
+      }
     }
   }`
 
@@ -32,6 +35,9 @@ exports.handler = async function(event) {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ userId: data.createUser._id })
+        body: JSON.stringify({
+          userId: data.createUser._id,
+          ticketid: data.createUser.ticket._id
+        })
     }
 }

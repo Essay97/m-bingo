@@ -6,6 +6,7 @@ query($name: String!) {
       _id
       name
       ticket {
+        _id
         row1
         row2
         row3
@@ -26,7 +27,10 @@ exports.handler = async function(event) {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({ user: response.data.findUserByName })
+        body: JSON.stringify({
+            user: response.data.findUserByName,
+            ticket: response.data.findUserByName.ticket
+        })
     }
 }
 
