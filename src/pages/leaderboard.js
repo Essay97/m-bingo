@@ -46,54 +46,7 @@ const Leaderboard = styled.ul`
 `;
 
 const LeaderboardPage = () => {
-  const [tickets, setTickets] = useState([
-    {
-      _id: "298327966938563079",
-      row1: ["sbinna", "sbinna", "sbinna", "sbinna", "sbinna"],
-      row2: [
-        "batte Mick",
-        "batte Mick",
-        "va a punti",
-        "batte Mick",
-        "batte Mick",
-      ],
-      row3: [
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-      ],
-      owner: {
-        _id: "298327966951145991",
-        name: "Enrico",
-      },
-      score: 3,
-    },
-    {
-      _id: "298327966938543079",
-      row1: [
-        "batte Mick",
-        "errore nei pit",
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-      ],
-      row2: ["sbinna", "sbinna", "va a punti", "batte Mick", "batte Mick"],
-      row3: [
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-        "batte Mick",
-      ],
-      owner: {
-        _id: "298327966951245991",
-        name: "Marco",
-      },
-      score: 0,
-    },
-  ]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
