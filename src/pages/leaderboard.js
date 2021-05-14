@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { mazepinThings } from "../data/mazepinThings";
+import { Link } from "gatsby";
 
 const Leaderboard = styled.ul`
   padding: 0;
@@ -45,22 +46,31 @@ const Leaderboard = styled.ul`
   }
 `;
 
+const NoUser = styled.p`
+  text-align: center;
+`;
+
 const LeaderboardPage = () => {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios({
-        method: "POST",
-        url: "/api/all-tickets",
-      });
+      try {
+        const response = await axios({
+          method: "POST",
+          url: "/api/all-tickets",
+        });
 
-      const calculatedTickets = response.data.tickets.map((item) => {
-        item.score = calculateScore([item.row1, item.row2, item.row3]);
-        return item;
-      });
-      setTickets(calculatedTickets.sort((a, b) => b.score - a.score));
+        const calculatedTickets = response.data.tickets.map((item) => {
+          item.score = calculateScore([item.row1, item.row2, item.row3]);
+          return item;
+        });
+        setTickets(calculatedTickets.sort((a, b) => b.score - a.score));
+      } catch (error) {
+        console.log(error);
+      }
     }
+
     fetchData();
   }, []);
 
@@ -92,6 +102,10 @@ const LeaderboardPage = () => {
           </li>
         ))}
       </Leaderboard>
+      <NoUser>
+        Non ha ancora giocato nessuno, <Link to="/">vai alla home</Link> per
+        essere il primo!
+      </NoUser>
       <Footer />
     </CenteredColumn>
   );

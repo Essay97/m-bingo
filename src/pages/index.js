@@ -193,17 +193,21 @@ const IndexPage = () => {
         const { row1, row2, row3 } = response.data.user.ticket;
         setTicket([row1, row2, row3]);
         setTicketId(response.data.ticket._id);
+      } else {
+        setRegistered(false);
+        alert(
+          "Non sei ancora registrato. Benvenuto! Gioca e clicca su Invia quando sei pronto"
+        );
       }
     } catch (error) {
+      console.log(error.response.data);
       setRegistered(false);
-      alert(
-        "Non sei ancora registrato. Benvenuto! Gioca e clicca su Invia quando sei pronto"
-      );
+      alert("Qualcosa è andato storto, riprova più tardi!");
     }
   }
 
   async function handleSubmit() {
-    if (user !== "" || !checkTicketEmpty()) {
+    if (user !== "" && !checkTicketEmpty()) {
       if (!registered) {
         // CASE: the user is not registered
         // catching response just in case user id is needed
@@ -220,15 +224,22 @@ const IndexPage = () => {
           });
           setRegistered(true);
           setTicketId(response.data.ticketId);
+          alert("La tua giocata è stata registrata!");
         } catch (error) {
-          alert(
-            "Qualcosa non funziona, probabilmente questo nome è già stato scelto"
-          );
+          console.log(error.response.data);
+
+          if (
+            error.response.data[0].extensions.code === "instance not unique"
+          ) {
+            alert(
+              "Questo nome è già stato scelto! Se questo è il tuo username, clicca il tasto OK di fianco al tuo nome prima di inviare, poi reinvia la tua giocata"
+            );
+          } else {
+            alert("Qualcosa non funziona, riprova più tardi!");
+          }
+
           return;
         }
-
-        //if everything has gone well
-        alert("La tua giocata è stata registrata!");
       } else {
         // CASE: the user is registered
         try {
@@ -242,12 +253,10 @@ const IndexPage = () => {
               id: ticketId,
             },
           });
+          alert("La tua giocata è stata registrata!");
         } catch (error) {
           alert("Qualcosa è andato storto, prova a reinviare!");
-          return;
         }
-
-        alert("La tua giocata è stata registrata!");
       }
     } else {
       alert("Immetti un nome utente e completa tutte le caselle per giocare!");
@@ -255,7 +264,9 @@ const IndexPage = () => {
   }
 
   function checkTicketEmpty() {
-    return ticket.some((row) => row.some((square) => !square));
+    const ticketEmpty = ticket.some((row) => row.some((square) => !square));
+    console.log(ticketEmpty);
+    return ticketEmpty;
   }
 
   return (
