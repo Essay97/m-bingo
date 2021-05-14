@@ -46,10 +46,6 @@ const Leaderboard = styled.ul`
   }
 `;
 
-const NoUser = styled.p`
-  text-align: center;
-`;
-
 const LeaderboardPage = () => {
   const [tickets, setTickets] = useState([]);
 
@@ -102,10 +98,6 @@ const LeaderboardPage = () => {
           </li>
         ))}
       </Leaderboard>
-      <NoUser>
-        Non ha ancora giocato nessuno, <Link to="/">vai alla home</Link> per
-        essere il primo!
-      </NoUser>
       <Footer />
     </CenteredColumn>
   );
