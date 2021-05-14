@@ -210,7 +210,6 @@ const IndexPage = () => {
     if (user !== "" && !checkTicketEmpty()) {
       if (!registered) {
         // CASE: the user is not registered
-        // catching response just in case user id is needed
         try {
           const response = await axios({
             method: "POST",

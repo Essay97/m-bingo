@@ -25,21 +25,17 @@ exports.handler = async function (event) {
     };
   }
 
-  if (response.data.findUserByName === null) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        user: null,
-        ticket: null,
-      }),
-    };
-  }
-
   return {
     statusCode: 200,
     body: JSON.stringify({
       user: response.data.findUserByName,
-      ticket: response.data.findUserByName.ticket,
+      ticket: () => {
+        try {
+          return response.data.findUserByName.ticket;
+        } catch (error) {
+          return null;
+        }
+      },
     }),
   };
 };
